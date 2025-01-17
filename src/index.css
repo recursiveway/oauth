@@ -80,6 +80,12 @@ iframe body {
   box-sizing: border-box;
 }
 
+.haAclf {
+  width: 100% !important;
+  height: 100% !important;
+  box-sizing: border-box; /* Account for padding/border */
+}
+
 iframe {
   display: block !important;
   position: relative !important;
