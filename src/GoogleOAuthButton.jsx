@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const GoogleOAuthButton = () => {
-  const clientId = '253843922361-e6tiu1snsrantg8ju0ppb9sdfsadf845645455383443534ksdfsadfsqt2isdfsdfsdf218.apps.googleusercontent.com';
+  const clientId = '541892232341-cui2h75p7g0o6g7prumtr2cnlb0qn6gq.apps.googleusercontent.com';
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
   useEffect(() => {
