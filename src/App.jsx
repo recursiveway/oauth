@@ -14,8 +14,6 @@ function App() {
       <GoogleLogin
         onSuccess={handleLoginSuccess}
         onError={handleLoginError}
-        useOneTap
-        theme="filled_blue"
         render={(renderProps) => (
           <button onClick={renderProps.onClick}>
             Sign in with Google
