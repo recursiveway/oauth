@@ -1,9 +1,6 @@
 import { GoogleLogin } from '@react-oauth/google';
-import { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   const handleLoginSuccess = (credentialResponse) => {
     console.log(credentialResponse);
   };
@@ -19,6 +16,11 @@ function App() {
         onError={handleLoginError}
         useOneTap
         theme="filled_blue"
+        render={(renderProps) => (
+          <button onClick={renderProps.onClick}>
+            Sign in with Google
+          </button>
+        )}
       />
     </>
   );
