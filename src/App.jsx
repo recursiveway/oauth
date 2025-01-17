@@ -1,9 +1,13 @@
 import { GoogleLogin } from '@react-oauth/google';
 import { useState } from 'react';
+import { useGoogleLogin } from '@react-oauth/google';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const login = useGoogleLogin({
+    onSuccess: codeResponse => console.log(codeResponse),
+    flow: 'auth-code',
+  });
   const handleLoginSuccess = (credentialResponse) => {
     // Only store the necessary information, avoiding email
     if (credentialResponse?.credential) {
@@ -48,6 +52,8 @@ function App() {
           </button>
         </div>
       )}
+
+      <button onClick={login}>Login</button>
     </div>
   );
 }
