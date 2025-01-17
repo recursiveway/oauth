@@ -55,10 +55,22 @@ const GoogleOAuthButton = () => {
   };
 
   return (
-    <div className="flex justify-center items-center p-4">
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '16px',
+        width: '1000px',
+      }}
+    >
       <div
         id="google-signin-button"
-        className="shadow-md rounded-lg w-full"
+        style={{
+          boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2)',
+          borderRadius: '8px',
+          width: '100%',
+        }}
       ></div>
     </div>
   );
