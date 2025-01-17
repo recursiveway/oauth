@@ -8,15 +8,19 @@ const GoogleOAuthButton = () => {
     script.src = 'https://accounts.google.com/gsi/client';
     script.async = true;
     script.defer = true;
+
     script.onload = () => {
       if (window.google) {
+        // Initialize Google Sign-In
         window.google.accounts.id.initialize({
           client_id: clientId,
           callback: handleCredentialResponse,
-          ux_mode: 'popup', // Open in a popup to avoid embedded email detection
-          auto_select: false, // Ensures no automatic email detection occurs
+          ux_mode: 'popup', // Forces popup mode
+          auto_select: false, // Disable automatic email selection
+          prompt: 'none', // Completely disables prompt UI
         });
 
+        // Render the button
         window.google.accounts.id.renderButton(
           document.getElementById('google-signin-button'),
           {
@@ -28,7 +32,7 @@ const GoogleOAuthButton = () => {
           }
         );
 
-        // Prevents Google from showing the One Tap prompt
+        // Explicitly disable "One Tap"
         window.google.accounts.id.disableAutoSelect();
       }
     };
@@ -46,12 +50,8 @@ const GoogleOAuthButton = () => {
     };
   }, []);
 
-  const handleCredentialResponse = async (response) => {
-    try {
-      console.log('Encoded JWT ID token: ' + response.credential);
-    } catch (error) {
-      console.error('Authentication error:', error);
-    }
+  const handleCredentialResponse = (response) => {
+    console.log('Encoded JWT ID token: ' + response.credential);
   };
 
   return (
