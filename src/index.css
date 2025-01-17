@@ -78,3 +78,10 @@ button:focus-visible {
   cursor: pointer;
   
 }
+
+#google-signin-button iframe {
+  width: 100%; /* Full width of the parent container */
+  height: 100%; /* Full height of the parent container */
+  border: none; /* Remove border around iframe */
+  display: block; /* Prevent inline layout issues */
+}
