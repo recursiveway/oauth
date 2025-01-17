@@ -1,25 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import GoogleOAuthButton from './GoogleOAuthButton'
 import { GoogleLogin } from '@react-oauth/google';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+
+  const handleLoginSuccess = (credentialResponse) => {
+    console.log(credentialResponse);
+  };
+
+  const handleLoginError = () => {
+    console.log('Login Failed');
+  };
 
   return (
-   <>
-   <GoogleLogin
-  onSuccess={credentialResponse => {
-    console.log(credentialResponse);
-  }}
-  onError={() => {
-    console.log('Login Failed');
-  }}
-/>;
-   </>
-  )
+    <>
+      <GoogleLogin
+        onSuccess={handleLoginSuccess}
+        onError={handleLoginError}
+        useOneTap
+        theme="filled_blue"
+      />
+    </>
+  );
 }
 
-export default App
+export default App;
