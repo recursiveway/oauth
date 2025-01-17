@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const GoogleOAuthButton = () => {
   const clientId = '253843922361-e6tiu1snsrantg8ju0ppb98ksqt2i218.apps.googleusercontent.com';
-  const [scriptLoaded, setScriptLoaded] = useState(false);//
+  const [scriptLoaded, setScriptLoaded] = useState(false);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -14,13 +14,15 @@ const GoogleOAuthButton = () => {
       if (window.google) {
         window.google.accounts.id.initialize({
           client_id: clientId,
-          callback: handleCredentialResponse
+          callback: handleCredentialResponse,
+          ux_mode: 'popup', // Prevents UI change for detected email
+          prompt: 'select_account', // Always prompts to choose an account
         });
 
         window.google.accounts.id.renderButton(
           document.getElementById('google-signin-button'),
-          { 
-            theme: 'outline', 
+          {
+            theme: 'outline',
             size: 'large',
             width: '100%',
             text: 'continue_with',
@@ -45,23 +47,7 @@ const GoogleOAuthButton = () => {
 
   const handleCredentialResponse = async (response) => {
     try {
-      // Handle the JWT credential
       console.log('Encoded JWT ID token: ' + response.credential);
-      
-      // Example of sending to backend - replace with your actual API call
-      // const result = await fetch('/api/auth/google', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({ credential: response.credential }),
-      // });
-      
-      // if (result.ok) {
-      //   const data = await result.json();
-      //   // Handle successful login
-      //   // e.g., update app state, redirect user, etc.
-      // }
     } catch (error) {
       console.error('Authentication error:', error);
     }
@@ -69,7 +55,7 @@ const GoogleOAuthButton = () => {
 
   return (
     <div className="flex justify-center items-center p-4">
-      <div 
+      <div
         id="google-signin-button"
         className="shadow-md rounded-lg w-full"
       ></div>
