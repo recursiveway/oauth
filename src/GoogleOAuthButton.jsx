@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 const GoogleOAuthButton = () => {
   const clientId = '253843922361-e6tiu1snsrantg8ju0ppb98ksqt2i218.apps.googleusercontent.com';
-  const [scriptLoaded, setScriptLoaded] = useState(false);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -10,13 +9,12 @@ const GoogleOAuthButton = () => {
     script.async = true;
     script.defer = true;
     script.onload = () => {
-      setScriptLoaded(true);
       if (window.google) {
         window.google.accounts.id.initialize({
           client_id: clientId,
           callback: handleCredentialResponse,
-          ux_mode: 'popup', // Prevents UI change for detected email
-          prompt: 'select_account', // Always prompts to choose an account
+          ux_mode: 'popup', // Open in a popup to avoid embedded email detection
+          auto_select: false, // Ensures no automatic email detection occurs
         });
 
         window.google.accounts.id.renderButton(
@@ -29,6 +27,9 @@ const GoogleOAuthButton = () => {
             shape: 'rectangular',
           }
         );
+
+        // Prevents Google from showing the One Tap prompt
+        window.google.accounts.id.disableAutoSelect();
       }
     };
 
